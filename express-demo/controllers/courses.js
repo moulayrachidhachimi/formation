@@ -52,8 +52,9 @@ exports.deleteCourse = async function deleteCourse(req, res) {
 
 exports.changeStatus = async function changeSatus(req, res) {
         let id = +req.params.id;
-        let myCourse = courses.find((course) => course.id === id);
+        let myCourse = await Course.find((course) => course.id === id);
 
         myCourse.status = !myCourse.status
-        res.send(courses)
+        const result = await myCourse.save();
+        res.send(result)
     }
