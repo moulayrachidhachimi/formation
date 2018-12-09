@@ -1,0 +1,42 @@
+
+
+  
+
+  
+<div class="row mt-5">
+    <div class="col-md-6 mx-auto">
+      <div class="card text-center">
+        
+        <div class="card-body">
+          <h4 class="card-title">Register</h4>
+          <div class="card-text">
+
+              <div class="form-group">
+                  <label for="firstname">firstname</label>
+                  <input [(ngModel)]="firstname" type="text" name="firstname" id="firstname" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname">lastname</label>
+                    <input [(ngModel)]="lastname" type="text" name="lastname" id="lastname" class="form-control">
+                  </div>
+  
+              <div class="form-group">
+                  <label for="email">email</label>
+                  <input [(ngModel)]="email" type="text" name="email" id="email" class="form-control">
+                </div>
+              
+                <div class="form-group">
+                    <label for="password">password</label>
+                    <input [(ngModel)]="password" type="password" name="password" id="password" class="form-control">
+                    
+                  </div>
+  
+                  <button (click)="register()" class="btn btn-warning btn-block"><i class="fa fa-user"></i> Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+      

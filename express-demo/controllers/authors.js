@@ -1,4 +1,5 @@
   const _ = require('lodash');
+  const bcrypt = require('bcrypt');
   const Author = require('../models/author');
 
 
@@ -9,12 +10,22 @@
 
  exports.postAuthor = function postAuthor(req, res) {
         
-        const myAuthor = new Author({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName
-        })
+   
+        bcrypt.hash(req.body.password, 10)
+           .then((myPassword) => {
 
-         myAuthor.save().then((Author) => res.send(Author));
+            const myAuthor = new Author({
+                        firstName: req.body.firstName,
+                        lastName: req.body.lastName,
+                        email: req.body.email,
+                        password: myPassword
+                    })
+
+                    myAuthor.save().then((Author) => res.send(Author));
+
+           })
+
+        
        
     }
 
@@ -43,5 +54,27 @@ exports.deleteAuthor = async function deleteAuthor(req, res) {
         let id = req.params.id;
         const result = await Author.findByIdAndDelete(id);
         res.send(result);
+    }
+
+
+    exports.login = async function login(req, res) {
+       
+        const myUser = await Author.find({ email: req.body.email })
+        
+          if(myUser) {
+            
+            try{
+                const result = await bcrypt.compare(req.body.password, myUser.password);
+                console.log(result)
+            }catch(e) {
+                console.log(e)
+            }
+          
+          
+          }else {
+              res.status(401).json({
+                  message: "auth failed!!"
+              })
+          }
     }
 

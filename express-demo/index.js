@@ -30,5 +30,5 @@ app.use('/api/courses', courseRoute);
 app.use('/api/authors', authorRoute);
 app.use('/api/tags', tagRoute);
 
-
-app.listen(3000, () => console.log('server is running on port 3000...'))
+const port = 3002;
+app.listen(3002, () => console.log(`server is running on port ${port} ...`))

@@ -7,6 +7,8 @@
 
     route.post('/', AuthorController.postAuthor)
 
+    route.post('/login', AuthorController.login);
+
     route.put('/:id', AuthorController.putAuthor);
 
     route.get('/:id', AuthorController.getOneAuthor)

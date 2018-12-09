@@ -9,6 +9,16 @@ export class AuthorService {
   constructor(private http: HttpClient) { }
 
   getAuthors() {
-    return this.http.get('http://localhost:3000/api/authors');
+    return this.http.get('http://localhost:3002/api/authors');
+  }
+
+
+  register(data) {
+    return this.http.post('http://localhost:3002/api/authors', data);
+  }
+
+
+  login(data) {
+    return this.http.post('http://localhost:3002/api/authors/login', data);
   }
 }

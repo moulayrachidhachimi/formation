@@ -9,6 +9,8 @@ import { ListCoursesComponent } from './list-courses/list-courses.component';
 import { AddCoursesComponent } from './add-courses/add-courses.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ListCoursesComponent,
     AddCoursesComponent,
     NavbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

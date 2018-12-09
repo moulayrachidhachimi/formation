@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http'
 })
 export class CourseService {
   
-  url = "http://localhost:3000/api/courses";
+  url = "http://localhost:3002/api/courses";
 
   constructor(private http: HttpClient) { }
 
