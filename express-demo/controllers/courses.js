@@ -1,25 +1,42 @@
   const _ = require('lodash');
   const Course = require('../models/course');
+  const Joi = require('joi');
 
-
-  const courses = [
-                  {id: 1, label: "Laravel", status: true}, 
-                  {id: 2, label: "Python", status: false},
-                  {id: 3, label: "NodeJS", status: true}
-                ]
 
   exports.getAllCourses =  function getAllCourses(req, res) {
-        Course.find().then((courses) => res.send(courses));
+        Course.find()
+        .populate('author')
+        .populate('tags')
+        .sort({label: 1})
+        .then((myCourses) => res.send(myCourses));
     }
 
 
  exports.postCourse = function postCourse(req, res) {
-        
+
+       const courseValidate = {
+            label: Joi.string().alphanum().required().min(3).max(20),
+            price: Joi.number().integer().required(),
+            author: Joi.required(),
+            tags: Joi.required()
+        }
+
+        const result = Joi.validate(req.body, courseValidate);
+
+        if(result.error) {
+            return res.status(400).send(result.error.details[0].message)
+        }
+       
         const myCourse = new Course({
-            label: req.body.label
+            label: req.body.label,
+            price: req.body.price,
+            tags: req.body.tags,
+            author: req.body.author
         })
 
-         myCourse.save().then((course) => res.send(course));
+         myCourse.save()
+           .then((course) => res.send(course))
+           .catch((err) => res.send(err.message));
        
     }
 

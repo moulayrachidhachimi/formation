@@ -1,0 +1,50 @@
+<div class="row mt-3">
+  <div class="col-md-6"><h1>New course</h1></div>
+  <div class="col-md-6 text-right">
+    <a routerLink="/" class="btn btn-light"><i class="fa fa-plus"></i> Back to list</a>
+  </div>
+</div>
+
+
+<div class="row mt-3">
+  <div class="col-md-6 mx-auto">
+    
+    <form #f="ngForm">
+
+    <div class="form-group">
+      <label for="label">label</label>
+      <input #courseLabel="ngModel" required minlength="3" maxlength="20" pattern="[0-9a-zA-Z ]*" type="text" [(ngModel)]="course.label" name="label" id="label" class="form-control" placeholder="label of course">
+      <div class="alert alert-danger" *ngIf="courseLabel.touched && courseLabel.invalid">
+         <div *ngIf="courseLabel.errors.required">this field is required!!</div>
+         <div *ngIf="courseLabel.errors.minlength">this field should be great than 3 chars!!</div>
+         <div *ngIf="courseLabel.errors.pattern">this field not respect thie pattern !!!</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="price">price</label>
+      <input type="text" [(ngModel)]="course.price" name="price" id="price" class="form-control" placeholder="price of course">
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author</label>
+      <select [(ngModel)]="course.author" name="author" id="author" class="form-control">
+        <option value=""></option>
+        <option [value]="author._id" *ngFor="let author of authors">{{ author.firstName }} {{ author.lastName | uppercase }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="tags">Tags</label>
+      <select [(ngModel)]="course.tags" name="tags" id="tags" class="form-control" multiple>
+        <option value=""></option>
+        <option [value]="tag._id" *ngFor="let tag of tags">{{ tag.label }}</option>
+      </select>
+    </div>
+    
+    {{ course | json }}
+     
+    <button (click)="persistPost()" [disabled]="f.invalid" class="btn btn-danger btn-block"><i class="fa fa-paper-plane"></i> Add new course</button>
+  </form>
+  </div>
+</div>

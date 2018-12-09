@@ -1,0 +1,37 @@
+
+
+<div class="row mt-3">
+  <div class="col-md-6"><h1>List of courses</h1></div>
+  <div class="col-md-6 text-right">
+    <a routerLink="/add" class="btn btn-success"><i class="fa fa-plus"></i> New course</a>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-md-12">
+    <div class="alert alert-warning text-center" *ngIf="!courses.length">
+      no courses in database MongoDB!
+    </div>
+    <table class="table table-triped" *ngIf="courses.length">
+      <thead>
+        <tr>
+          <th>Label</th>
+          <th>Author</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses; index as i" (dblclick)="removeCourse(course._id, i)">
+          <td>{{ course.label }}</td>
+          <td>{{ course.author.firstName }} {{ course.author.lastName }}</td>
+          <td>{{ course.price | currency }}</td>
+          <td class="text-right">
+            <button class="btn btn-secondary mr-1"><i class="fa fa-trash"></i></button>
+            <button class="btn btn-danger"><i class="fa fa-pencil"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
